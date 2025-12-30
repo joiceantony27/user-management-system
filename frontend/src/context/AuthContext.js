@@ -67,8 +67,18 @@ export const AuthProvider = ({ children }) => {
         return { success: true };
       }
     } catch (error) {
+      console.error('Signup error:', error);
       const errorData = error.response?.data;
-      const errorMessage = errorData?.message || 'Signup failed';
+      let errorMessage = 'Signup failed';
+      
+      if (error.message === 'Network Error') {
+        errorMessage = 'Cannot connect to server. Please try again.';
+      } else if (errorData?.message) {
+        errorMessage = errorData.message;
+      } else if (errorData?.detail) {
+        errorMessage = errorData.detail;
+      }
+      
       toast.error(errorMessage);
       return { 
         success: false, 
