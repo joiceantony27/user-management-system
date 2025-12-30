@@ -184,6 +184,7 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    'https://user-management-system-gamma-eight.vercel.app',
 ]
 
 # Add production frontend URL from environment
@@ -194,6 +195,9 @@ if os.getenv('CORS_ALLOWED_ORIGINS'):
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r'^https://.*\.vercel\.app$',
 ]
+
+# Allow all origins in development (for testing)
+CORS_ALLOW_ALL_ORIGINS = os.getenv('CORS_ALLOW_ALL', 'False').lower() == 'true'
 
 CORS_ALLOW_CREDENTIALS = True
 
